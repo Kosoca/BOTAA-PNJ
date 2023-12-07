@@ -1,0 +1,5 @@
+name: botaa-pnj
+version: '${version}'
+main: fr.botaapnj.botaapnj.BotaaPnj
+api-version: '1.20'
+authors: [botaa]
