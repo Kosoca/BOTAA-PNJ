@@ -9,7 +9,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public class Vortor implements Listener {
   private static final String nameOfGui = "<shift:-8><glyph:vortor_page_principale><shift:-190>";
   
-  private static final String nameOfPnj = ";
+  private static final String nameOfPnj = "";
   
   public static void openGui(Player owner) {
     GuiBuilder gui = new GuiBuilder(owner, 54, "<shift:-8><glyph:vortor_page_principale><shift:-190>");
@@ -31,7 +30,7 @@ public class Vortor implements Listener {
   public void onInteract(PlayerInteractEntityEvent event) {
     Entity entity = event.getRightClicked();
     Player player = event.getPlayer();
-    if (entity.getName().equals("))
+    if (entity.getName().equals(""))
       openGui(player); 
   }
   
