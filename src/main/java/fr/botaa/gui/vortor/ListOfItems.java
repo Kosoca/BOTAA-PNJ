@@ -617,12 +617,12 @@
 
 
        })),
-  /* 620 */   SLOT_53(53, (new ItemBuilder(Material.PAPER, 1)).setName("" + ChatColor.of("#09656d") + "§lMaitrise des" + ChatColor.of("#09656d") + "§l " + ChatColor.of(ElementItem.OMBRE.getTextComponent().color().asHexString()))
-/* 621 */     .setModelData(Integer.valueOf(999))
-/* 622 */     .setLore(new String[] {
+   SLOT_53(53, (new ItemBuilder(Material.PAPER, 1)).setName("" + ChatColor.of("#09656d") + "§lMaitrise des" + ChatColor.of("#09656d") + "§l " + ChatColor.of(ElementItem.OMBRE.getTextComponent().color().asHexString()))
+     .setModelData(Integer.valueOf(999))
+    .setLore(new String[] {
 
-/* 624 */         "", "" + ChatColor.of("#3cbbc6") + "Les airs vous permettrons d'être plus", "" +
-                  /* 625 */         ChatColor.of("#3cbbc6") + "rapide dans vos déplacements & attaques.", "", "§6§nCoût§r §e: §d1000 §7Niveaux d'experience"
+        "", "" + ChatColor.of("#3cbbc6") + "Les airs vous permettrons d'être plus", "" +
+                          ChatColor.of("#3cbbc6") + "rapide dans vos déplacements & attaques.", "", "§6§nCoût§r §e: §d1000 §7Niveaux d'experience"
        }));
   
   
@@ -635,15 +635,15 @@
   
   
      ListOfItems(int slot, ItemBuilder item) {
-    /* 638 */     this.slot = slot;
-    /* 639 */     this.itemBuilder = item;
+        this.slot = slot;
+         this.itemBuilder = item;
        }
   
      public int getSlot() {
-    /* 643 */     return this.slot;
+         return this.slot;
        }
   
      public ItemBuilder getItemBuilder() {
-    /* 647 */     return this.itemBuilder;
+         return this.itemBuilder;
        }
    }

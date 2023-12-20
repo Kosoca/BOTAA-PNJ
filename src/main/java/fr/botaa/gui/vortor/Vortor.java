@@ -1,5 +1,9 @@
 package fr.botaa.gui.vortor;
 
+import fr.botaa.botaaplayer.BotaaPlayer;
+import fr.botaa.gui.chapitredescompetences.eau.eaupage1.ChapitreDesCompetencesEauPage1;
+import fr.botaa.gui.chapitredescompetences.ombre.ombrepage1.ChapitreDesCompetencesOmbrePage1;
+import fr.botaa.gui.chapitredescompetences.vent.ventpage1.ChapitreDesCompetencesVentPage1;
 import fr.botaa.gui.verifshop.VerifShopping;
 import fr.botaa.lib.ElementItem;
 import fr.botaa.utils.GuiBuilder;
@@ -16,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 public class Vortor implements Listener {
   private static final String nameOfGui = "<shift:-8><glyph:vortor_page_principale><shift:-190>";
   
-  private static final String nameOfPnj = "";
+  private static final String nameOfPnj = "§e§lVortor";
   
   public static void openGui(Player owner) {
     GuiBuilder gui = new GuiBuilder(owner, 54, "<shift:-8><glyph:vortor_page_principale><shift:-190>");
@@ -30,7 +34,7 @@ public class Vortor implements Listener {
   public void onInteract(PlayerInteractEntityEvent event) {
     Entity entity = event.getRightClicked();
     Player player = event.getPlayer();
-    if (entity.getName().equals(""))
+    if (entity.getName().equals(nameOfPnj))
       openGui(player); 
   }
   
@@ -41,18 +45,26 @@ public class Vortor implements Listener {
     ItemStack itemClicked = event.getCurrentItem();
     if (itemClicked == null)
       return; 
-    if (title.equals("<shift:-8><glyph:vortor_page_principale><shift:-190>")) {
+    if (title.equals(nameOfGui)) {
       event.setCancelled(true);
       switch (event.getClick()) {
         case RIGHT:
           if (itemClicked.isSimilar(ListOfItems.SLOT_0.getItemBuilder().toItemStack())) {
             player.closeInventory();
             VerifShopping.openGui(player, 1000, ElementItem.VENT);
-          } 
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_3.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            VerifShopping.openGui(player, 1000, ElementItem.EAU);
+          }
           break;
         case LEFT:
-          if (itemClicked.isSimilar(ListOfItems.SLOT_0.getItemBuilder().toItemStack()))
-            player.closeInventory(); 
+          if (itemClicked.isSimilar(ListOfItems.SLOT_0.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            ChapitreDesCompetencesVentPage1.openGui(player);
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_3.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            ChapitreDesCompetencesEauPage1.openGui(player);
+          }
           break;
       } 
     } 

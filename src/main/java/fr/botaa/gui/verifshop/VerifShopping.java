@@ -50,7 +50,7 @@
         /* 50 */     if (itemClicked == null) {
               return;
             }
-        /* 53 */     if (title.equals("§eVoulez-vous acheter ?")) {
+        /* 53 */     if (title.equals(nameOfGui)) {
             /* 54 */       event.setCancelled(true);
             /* 55 */       if (itemClicked.isSimilar(ListOfItems.OUI.getItemBuilder().toItemStack())) {
                 /* 56 */         checkPlayerHaveEnoughtXp(player, getElementShop());
