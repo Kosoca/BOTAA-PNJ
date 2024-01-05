@@ -1,11 +1,12 @@
-/*    */ package fr.botaa.gui.verifshop;
+package fr.botaa.gui.verifshop;
 /*    */
-/*    */ import fr.botaa.lib.ElementItem;
-/*    */ import fr.botaa.utils.GuiBuilder;
-/*    */ import org.bukkit.Location;
-/*    */ import org.bukkit.Particle;
-/*    */ import org.bukkit.Sound;
-/*    */ import org.bukkit.SoundCategory;
+
+import fr.botaa.lib.ElementItem;
+import fr.botaa.utils.GuiBuilder;
+/*    */ import org.bukkit.*;
+/*    */
+/*    */
+/*    */
 /*    */ import org.bukkit.entity.Player;
 /*    */ import org.bukkit.event.EventHandler;
 /*    */ import org.bukkit.event.Listener;
@@ -13,34 +14,32 @@
 /*    */ import org.bukkit.event.inventory.InventoryType;
 /*    */ import org.bukkit.inventory.ItemStack;
 /*    */
-/*    */ public class VerifShopping
-      implements Listener {
+public class VerifShopping implements Listener {
   private static final String nameOfGui = "§eVoulez-vous acheter ?";
   private static int aPrice;
   private static ElementItem aElementItem;
-    /*    */
-  public static void openGui(Player owner, int price, ElementItem elementItem) {
-        /* 23 */     aPrice = price;
-        /* 24 */     aElementItem = elementItem;
-        /*    */
-        /* 26 */     if (owner.getLevel() < 1000) {
-            /* 27 */       owner.playSound(owner.getLocation(), Sound.ENTITY_ENDERMAN_AMBIENT, SoundCategory.RECORDS, 100.0F, 0.0F);
-            /* 28 */       owner.sendMessage("§cVous n'avez pas les éléments requis.");
-            /* 29 */       owner.closeInventory();
-            /*    */
-              return;
+  private static String aPermission;
+
+  public static void openGui(Player owner, int price, ElementItem elementItem, String permission) {
+            aPrice = price;
+            aElementItem = elementItem;
+            aPermission = permission;
+            if (owner.getLevel() < 1000) {
+                    owner.playSound(owner.getLocation(), Sound.ENTITY_ENDERMAN_AMBIENT, SoundCategory.RECORDS, 100.0F, 0.0F);
+                    owner.sendMessage("§cVous n'avez pas les éléments requis.");
+                    owner.closeInventory();
+                    return;
             }
-        /* 33 */     GuiBuilder gui = new GuiBuilder(owner, InventoryType.HOPPER, "§eVoulez-vous acheter ?");
-        /* 34 */     owner.playSound(owner.getLocation(), Sound.UI_LOOM_SELECT_PATTERN, 300.0F, -1.0F);
-        /*    */
-        /* 36 */     for (ListOfItems item : ListOfItems.values()) {
-            /* 37 */       gui.getInventory().setItem(item.getSlot(), item.getItemBuilder().toItemStack());
+        GuiBuilder gui = new GuiBuilder(owner, InventoryType.HOPPER, nameOfGui);
+        owner.playSound(owner.getLocation(), Sound.UI_LOOM_SELECT_PATTERN, 300.0F, -1.0F);
+
+        for (ListOfItems item : ListOfItems.values()) {
+            gui.getInventory().setItem(item.getSlot(), item.getItemBuilder().toItemStack());
             }
-        /*    */
-        /* 40 */     owner.openInventory(gui.getInventory());
+
+        owner.openInventory(gui.getInventory());
       }
-    /*    */
-    /*    */
+
   @EventHandler
   public void onClickGui(InventoryClickEvent event) {
         /* 46 */     Player player = (Player)event.getWhoClicked();
@@ -53,7 +52,7 @@
         /* 53 */     if (title.equals(nameOfGui)) {
             /* 54 */       event.setCancelled(true);
             /* 55 */       if (itemClicked.isSimilar(ListOfItems.OUI.getItemBuilder().toItemStack())) {
-                /* 56 */         checkPlayerHaveEnoughtXp(player, getElementShop());
+                /* 56 */         checkPlayerHaveEnoughtXp(player, getElementShop(), getPermissionShop());
                 /* 57 */         player.getInventory().close();
                   }
             /* 59 */       else if (itemClicked.isSimilar(ListOfItems.NON.getItemBuilder().toItemStack())) {
@@ -63,11 +62,13 @@
       }
     /*    */
     /*    */
-  private void checkPlayerHaveEnoughtXp(Player player, ElementItem elementItem) {
+  private void checkPlayerHaveEnoughtXp(Player player, ElementItem elementItem, String permission) {
         /* 67 */     if (player.getLevel() >= 1000) {
             /* 68 */       player.setLevel(player.getLevel() - 1000);
             /* 69 */       player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, SoundCategory.RECORDS, 300.0F, -1.0F);
-            /* 70 */       player.sendMessage("§aVous êtes maintenant affilié à l'élément " + elementItem.getTextComponent().content() + ".");
+            /* 70 */
+                           Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + player.getName() + " permission set " + permission);
+                           player.sendMessage("§aVous êtes maintenant affilié à l'élément " + elementItem.getTextComponent().content() + ".");
             /* 71 */       player.getInventory().close();
             /* 72 */       createMagicParticles(player.getLocation());
             } else {
@@ -91,11 +92,14 @@
       }
     /*    */
     /*    */
-  public static int getPrice() {
+    public static int getPrice() {
         /* 95 */     return aPrice;
       }
-    /*    */
-  public static ElementItem getElementShop() {
+      public static ElementItem getElementShop() {
         /* 99 */     return aElementItem;
       }
+      public static String getPermissionShop() {
+        /* 99 */     return aPermission;
+    }
+
 }

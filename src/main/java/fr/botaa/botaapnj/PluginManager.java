@@ -10,6 +10,7 @@ import fr.botaa.gui.phorgos.Phorgos;
 import fr.botaa.gui.verifshop.VerifShopping;
 import fr.botaa.gui.volette.Volette;
 import fr.botaa.gui.vortor.Vortor;
+import fr.botaa.gui.vortor.slotAffiliationElement.SlotAffiliationElement;
 import fr.botaa.gui.zazou.Zazou;
 
 public class PluginManager {
@@ -19,6 +20,7 @@ public class PluginManager {
     public PluginManager(BotaaPnj plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(new VerifShopping(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new SlotAffiliationElement(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new Vortor(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new Kiki(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new Momo(), plugin);

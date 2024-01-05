@@ -1,11 +1,16 @@
 package fr.botaa.gui.vortor;
 
-import fr.botaa.botaaplayer.BotaaPlayer;
+
 import fr.botaa.gui.chapitredescompetences.eau.eaupage1.ChapitreDesCompetencesEauPage1;
+import fr.botaa.gui.chapitredescompetences.feu.feupage1.ChapitreDesCompetencesFeuPage1;
+import fr.botaa.gui.chapitredescompetences.lumiere.lumierepage1.ChapitreDesCompetencesLumierePage1;
 import fr.botaa.gui.chapitredescompetences.ombre.ombrepage1.ChapitreDesCompetencesOmbrePage1;
+import fr.botaa.gui.chapitredescompetences.terre.terrepage1.ChapitreDesCompetencesTerrePage1;
 import fr.botaa.gui.chapitredescompetences.vent.ventpage1.ChapitreDesCompetencesVentPage1;
 import fr.botaa.gui.verifshop.VerifShopping;
+import fr.botaa.gui.vortor.slotAffiliationElement.SlotAffiliationElement;
 import fr.botaa.lib.ElementItem;
+import fr.botaa.lib.ListOfSkillsOfBotaa;
 import fr.botaa.utils.GuiBuilder;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -51,19 +56,44 @@ public class Vortor implements Listener {
         case RIGHT:
           if (itemClicked.isSimilar(ListOfItems.SLOT_0.getItemBuilder().toItemStack())) {
             player.closeInventory();
-            VerifShopping.openGui(player, 1000, ElementItem.VENT);
+            SlotAffiliationElement.openGui(player, 1000, ElementItem.VENT, "botaa.competences.element.vent");
           } else if (itemClicked.isSimilar(ListOfItems.SLOT_3.getItemBuilder().toItemStack())) {
             player.closeInventory();
-            VerifShopping.openGui(player, 1000, ElementItem.EAU);
+            SlotAffiliationElement.openGui(player, 1000, ElementItem.EAU, "botaa.competences.element.eau");
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_6.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            SlotAffiliationElement.openGui(player, 1000, ElementItem.TERRE, "botaa.competences.element.terre");
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_27.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            SlotAffiliationElement.openGui(player, 1000, ElementItem.FEU, "botaa.competences.element.feu");
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_30.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            SlotAffiliationElement.openGui(player, 1000, ElementItem.LUMIERE, "botaa.competences.element.lumiere");
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_33.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            SlotAffiliationElement.openGui(player, 1000, ElementItem.OMBRE, "botaa.competences.element.ombre");
           }
           break;
         case LEFT:
           if (itemClicked.isSimilar(ListOfItems.SLOT_0.getItemBuilder().toItemStack())) {
+
             player.closeInventory();
             ChapitreDesCompetencesVentPage1.openGui(player);
           } else if (itemClicked.isSimilar(ListOfItems.SLOT_3.getItemBuilder().toItemStack())) {
             player.closeInventory();
             ChapitreDesCompetencesEauPage1.openGui(player);
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_6.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            ChapitreDesCompetencesTerrePage1.openGui(player);
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_27.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            ChapitreDesCompetencesFeuPage1.openGui(player);
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_30.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            ChapitreDesCompetencesLumierePage1.openGui(player);
+          } else if (itemClicked.isSimilar(ListOfItems.SLOT_33.getItemBuilder().toItemStack())) {
+            player.closeInventory();
+            ChapitreDesCompetencesOmbrePage1.openGui(player);
           }
           break;
       } 
